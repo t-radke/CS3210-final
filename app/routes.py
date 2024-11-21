@@ -2,6 +2,7 @@ import pandas as pd
 import joblib
 from flask import render_template, jsonify, request
 from app import app
+from nfl_schedule import get_current_week_schedule
 
 # Load the pre-trained model
 MODEL_FILE = "models/nfl_game_predictor.pkl"
