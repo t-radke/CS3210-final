@@ -1,44 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NFL Game Predictor</title>
-</head>
-<body>
-    <h1>Current Week's NFL Games</h1>
-    <ul id="games-list"></ul>
-    <div id="result"></div>
+{% extends "base.html" %}
 
-    <script>
-        async function fetchGames() {
-            const response = await fetch('/current_games');
-            const games = await response.json();
-            const gamesList = document.getElementById('games-list');
-            gamesList.innerHTML = '';
+{% block title %}Home{% endblock %}
 
-            games.forEach(game => {
-                const li = document.createElement('li');
-                li.innerHTML = `
-                    ${game.home_team} vs ${game.away_team} - ${game.game_date}
-                    <button onclick="predictWinner('${game.home_team}', '${game.away_team}')">Predict</button>
-                `;
-                gamesList.appendChild(li);
-            });
-        }
-
-        async function predictWinner(home, away) {
-            const response = await fetch('/predict_teams', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ home_team: home, away_team: away })
-            });
-            const result = await response.json();
-            document.getElementById('result').innerText = `Winner: ${result.winner}, Home Win Probability: ${result.home_win_probability}`;
-        }
-
-        // Load the games on page load
-        fetchGames();
-    </script>
-</body>
-</html>
+{% block content %}
+    <div class="text-center">
+        <h2>Welcome to the NFL Game Predictor!</h2>
+        <p class="lead">Select a game to predict the winner or view the weekly schedule to explore upcoming matchups.</p>
+        <a href="/schedule" class="btn btn-primary btn-lg">View Schedule</a>
+    </div>
+{% endblock %}

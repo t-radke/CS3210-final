@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Prediction{% endblock %}
+
+{% block content %}
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h2>Prediction for {{ home_team }} vs {{ away_team }}</h2>
+        </div>
+        <div class="card-body">
+            <p class="fs-5"><strong>Predicted Outcome:</strong> {{ prediction }}</p>
+            
+            <h3 class="mt-4">Why This Team is Predicted to Win:</h3>
+            <ul>
+                {% for factor in factors %}
+                    <li>{{ factor }}</li>
+                {% endfor %}
+            </ul>
+
+            <h3 class="mt-4">Win Probability:</h3>
+            <div class="text-center">
+                <img src="{{ probability_chart_url }}" alt="Win Probability Chart" class="img-fluid rounded shadow" style="max-width: 60%;">
+            </div>
+
+            <div class="text-center mt-4">
+                <a href="{{ url_for('schedule') }}" class="btn btn-secondary">Back to Schedule</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

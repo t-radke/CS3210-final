@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Schedule{% endblock %}
+
+{% block content %}
+    <h2 class="text-center mb-4">This Week's Games (Week {{ current_week }})</h2>
+    <div class="list-group">
+        {% for game in games %}
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+                <span>
+                    <strong>{{ game.home_team }}</strong> vs <strong>{{ game.away_team }}</strong> <br>
+                    <small class="text-muted">on {{ game.gameday }}</small>
+                </span>
+                <form action="{{ url_for('predict', game_id=game['game_id']) }}" method="get">
+                    <button type="submit" class="btn btn-primary">Predict</button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,2 +1,5 @@
 .venv
 __pycache__
+new_venv
+app/static/probability_charts/
+app/__pycache__
