@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, precision_score, recall_score, classification_report
 import joblib
 import os
 
@@ -9,7 +9,7 @@ if not os.path.exists('models'):
     os.makedirs('models')
 
 #Load the updated dataset
-DATA_FILE = "data/Updated_Team_Specific_NFL_Game_Data.csv"
+DATA_FILE = "/Users/tylerradke/Documents/MSU_Denver/FALL_2024/CS3210/FinalProject/CS3210-final/data/Updated_Team_Specific_NFL_Game_Data.csv"
 data = pd.read_csv(DATA_FILE)
 
 #Add derived features
@@ -42,9 +42,20 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 model = RandomForestClassifier(n_estimators=100, random_state=42)
 model.fit(X_train, y_train)
 
-#Evaluate the model
-accuracy = accuracy_score(y_test, model.predict(X_test))
+# Evaluate the model
+y_pred = model.predict(X_test)
+
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred)
+recall = recall_score(y_test, y_pred)
+report = classification_report(y_test, y_pred)
+
 print(f"Random Forest Model Accuracy: {accuracy:.2f}")
+print(f"Precision: {precision:.2f}")
+print(f"Recall: {recall:.2f}")
+print("\nClassification Report:")
+print(report)
+
 
 joblib.dump(model, "models/nfl_game_predictor_updated.pkl")
 print("Updated model saved to 'models/nfl_game_predictor_updated.pkl'")

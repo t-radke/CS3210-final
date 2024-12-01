@@ -27,7 +27,6 @@ data
 |__current_season_data.csv
 |__Updated_Team_Specific_NFL_Games.csv
 models
-|__train_model.py
 |__nfl_game_predictor_updated.pkl
 Project-Milestone-OPEN-ME
 |__current_season_data.csv
@@ -37,6 +36,7 @@ Project-Milestone-OPEN-ME
 README.md
 requirements.txt
 run.py
+train_model.py
 ```
 
 # Instructions 
@@ -56,7 +56,7 @@ pip install -r requirements.txt
 ### **Setup**
 The project includes a pre-trained model (`nfl_game_predictor_updated.pkl`) in the `models/` directory. You can skip the model training step unless you want to retrain or update the model with new data.
 
-To retrain the model (optional) navigate to `models/` folder and run:
+To retrain the model (optional) run:
 ```
 python train_model.py
 ```
